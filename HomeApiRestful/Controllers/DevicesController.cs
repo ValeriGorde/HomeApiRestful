@@ -1,22 +1,30 @@
 ﻿using AutoMapper;
-using HomeApiRestful.Contracts.Devices;
-using HomeApiRestful.Models;
+using HomeApi.Contracts.Models.Devices;
+using HomeApi.DAL.Models;
+using HomeApi.DAL.Repositories.Interfaces;
+using HomeApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-namespace HomeApiRestful.Controllers
+namespace HomeApi.Controllers
 {
+    /// <summary>
+    /// Контроллер устройств
+    /// </summary>
+    
     [ApiController]
     [Route("[controller]")]
-    public class DevicesController: ControllerBase
+    public class DevicesController : ControllerBase
     {
-        private IOptions<HomeOptions> _options;
+        private IDeviceRepository _devices;
+        private IRoomRepository _rooms;
         private IMapper _mapper;
 
-        public DevicesController(IOptions<HomeOptions> options, IMapper mapper)
+        public DevicesController(IMapper mapper, IDeviceRepository devices, IRoomRepository rooms)
         {
-            _options = options;
             _mapper = mapper;
+            _devices = devices;
+            _rooms = rooms;
         }
 
         /// <summary>
@@ -25,10 +33,17 @@ namespace HomeApiRestful.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("")]
-        public IActionResult Get()
+        public async Task<IActionResult> GetDevices()
         {
-            return StatusCode(200, "Устройства отсутствуют");
+            var devices = await _devices.GetDevices();
 
+            var response = new GetDevicesResponse
+            {
+                DeviceAmount = devices.Length,
+                Devices = _mapper.Map<Device[], DeviceView[]>(devices)
+            };
+
+            return StatusCode(200, response);
         }
 
         /// <summary>
@@ -39,13 +54,7 @@ namespace HomeApiRestful.Controllers
         [Route("Add")]
         public IActionResult Add([FromBody] AddDeviceRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                return StatusCode(200, $"Устройство {request.Name} добавлено!");
-            }
-            return BadRequest(ModelState);
-
-
+            return StatusCode(200, $"Устройство {request.Name} добавлено!");
         }
     }
 }

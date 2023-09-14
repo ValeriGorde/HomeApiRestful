@@ -1,4 +1,6 @@
-﻿namespace HomeApiRestful.Contracts.Home
+﻿using HomeApi.Contracts.Models.Home;
+
+namespace HomeApi.Contracts.Models.Devices
 {
     public class InfoResponse
     {

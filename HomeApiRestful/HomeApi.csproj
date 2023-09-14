@@ -9,7 +9,13 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HomeApi.Contracts\HomeApi.Contracts.csproj" />
+    <ProjectReference Include="..\HomeApi.Data\HomeApi.DAL.csproj" />
   </ItemGroup>
 
 </Project>

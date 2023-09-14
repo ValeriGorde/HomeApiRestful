@@ -1,4 +1,4 @@
-﻿namespace HomeApiRestful.Contracts.Home
+﻿namespace HomeApi.Contracts.Models.Home
 {
     public class AddressInfo
     {

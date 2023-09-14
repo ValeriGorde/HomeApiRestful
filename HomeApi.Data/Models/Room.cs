@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HomeApi.DAL.Models
+{
+    [Table("Rooms")]
+    public class Room: BaseModel
+    {
+        public DateTime AddDate { get; set; } = DateTime.Now;
+        public string Name { get; set; }
+        public int Area { get; set; }
+        public bool GasConnected { get; set; }
+        public int Voltage { get; set; }
+    }
+}

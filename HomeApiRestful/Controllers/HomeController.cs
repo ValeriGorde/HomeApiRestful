@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
-using HomeApiRestful.Contracts.Home;
-using HomeApiRestful.Models;
+using HomeApi.Contracts.Models.Devices;
+using HomeApi.Contracts.Models.Home;
+using HomeApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Text;
 
-namespace HomeApiRestful.Controllers
+namespace HomeApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]

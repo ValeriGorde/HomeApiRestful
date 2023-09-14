@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace HomeApiRestful.Models
+namespace HomeApi.Models
 {
     /// <summary>
     /// Информация о доме

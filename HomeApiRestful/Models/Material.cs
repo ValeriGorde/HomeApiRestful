@@ -1,4 +1,4 @@
-﻿namespace HomeApiRestful.Models
+﻿namespace HomeApi.Models
 {
     /// <summary>
     /// Материал изготовления
