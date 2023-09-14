@@ -28,9 +28,9 @@ namespace HomeApi.DAL.Repositories
         /// <exception cref="NotImplementedException"></exception>
         public async Task DeleteDevice(Device device)
         {
-            var entry = _dbContext.Entry(device);
+            var entry = await _dbContext.Devices.FirstOrDefaultAsync(e => e.Id == device.Id);
 
-            if (entry.State == EntityState.Detached)
+            if (entry != null)
                 _dbContext.Devices.Remove(device);
 
             await _dbContext.SaveChangesAsync();

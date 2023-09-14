@@ -21,8 +21,8 @@ namespace HomeApi.Contracts.Validation
             RuleFor(x => x.Model).NotEmpty();
             RuleFor(x => x.SerialNumber).NotEmpty();
             RuleFor(x => x.CurrentVolts).NotEmpty().InclusiveBetween(120, 220);
-            RuleFor(x => x.GasUsage).NotEmpty();
-            RuleFor(x => x.Location).NotEmpty().Must(BeSupported).
+            RuleFor(x => x.GasUsage).NotNull();
+            RuleFor(x => x.RoomLocation).NotEmpty().Must(BeSupported).
                 WithMessage($"Пожалуйста, выберите одно из предложенных расположение: {string.Join(",", "_validLocation")}");
         }
 

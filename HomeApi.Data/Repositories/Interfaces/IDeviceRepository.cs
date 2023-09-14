@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace HomeApi.DAL.Repositories.Interfaces
 {
     /// <summary>
-    /// Модель, определяющая методы для доступа к объектам типа Device в БД
+    /// Интерфейс, определяющая методы для доступа к объектам типа Device в БД
     /// </summary>
     public interface IDeviceRepository
     {

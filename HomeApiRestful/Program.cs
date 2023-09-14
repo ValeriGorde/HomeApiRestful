@@ -3,6 +3,8 @@ using FluentValidation.AspNetCore;
 using HomeApi.Contracts.Models.Devices;
 using HomeApi.Contracts.Validation;
 using HomeApi.DAL;
+using HomeApi.DAL.Repositories.Interfaces;
+using HomeApi.DAL.Repositories;
 using HomeApi.Mapping;
 using HomeApi.Models;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +28,10 @@ builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseNpgsql
 // Добавляем маппинг
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
+// Регистрация сервиса репозитория для взаимодействия с БД
+builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+
 // Добавляем новый сервис
 builder.Services.Configure<HomeOptions>(builder.Configuration);
 
@@ -40,10 +46,15 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// Подключаем класс валидации
+// Подключаем классы валидации
 builder.Services.AddFluentValidationAutoValidation(); 
 builder.Services.AddFluentValidationClientsideAdapters(); 
 builder.Services.AddValidatorsFromAssembly(typeof(AddDeviceRequestValidator).Assembly);
+builder.Services.AddValidatorsFromAssembly(typeof(AddRoomRequestValidator).Assembly);
+builder.Services.AddValidatorsFromAssembly(typeof(EditDeviceRequestValidator).Assembly);
+
+// Маппим DateTime и timestamp для корректной работы с БД
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 var app = builder.Build();
 

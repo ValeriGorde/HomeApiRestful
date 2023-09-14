@@ -1,4 +1,5 @@
 ﻿using HomeApi.DAL.Models;
+using HomeApi.DAL.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,11 @@ namespace HomeApi.DAL.Repositories.Interfaces
     /// </summary>
     public interface IRoomRepository
     {
-        public Task<Room> GetRoomByName(string name);
-        public Task AddRoom(Room room);
+        Task<Room[]> GetRooms();
+        Task<Room> GetRoomById(Guid id);
+        Task<Room> GetRoomByName(string name);
+        Task AddRoom(Room room);    
+        Task DeleteRoom(Room room);
+        Task UpdateRoom(Room room, UpdateRoomQuery query);
     }
 }
